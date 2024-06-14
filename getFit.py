@@ -82,8 +82,8 @@ def get_garmin_data(client):
     ) as err:
         print("Error occurred during Garmin Connect Client get stats: %s" % err)
         quit()
-    except Exception:  # pylint: disable=broad-except
-        print("Unknown error occurred during Garmin Connect Client get stats")
+    except Exception as e:  # pylint: disable=broad-except
+        print(f"Unknown error occurred during Garmin Connect Client get stats: {e}")
         quit()
 
 
@@ -146,7 +146,9 @@ def main():
     g_email = os.getenv("GARMIN_EMAIL")
     g_password = os.getenv("GARMIN_PW")
     step_goal = int(os.getenv("DAILY_STEP_GOAL"))
+    print(f"Daily Step Goal Set to: {step_goal} steps")
     cal_goal = int(os.getenv("DAILY_CALORIE_GOAL"))
+    print(f"Daily Active Calorie Goal Set to: {cal_goal} calories")
     tokenstore = os.getenv("GARMIN_CRED_PATH")
     polling_freq = int(os.getenv("POLLING_FREQ"))
 
@@ -157,8 +159,13 @@ def main():
     while True:
         todays_stats = get_garmin_data(garmin_client)
         
-        curr_active_cals = todays_stats.get("activeKilocalories")
-        curr_steps = todays_stats.get("totalSteps")
+        curr_active_cals = todays_stats.get("activeKilocalories",0)
+        curr_steps = todays_stats.get("totalSteps",0)
+
+        if not curr_active_cals:
+            curr_active_cals = 0
+        if not curr_steps:
+            curr_steps = 0
 
         print(f"Current Active Calories: {curr_active_cals}")
         print(f"Current Steps: {curr_steps}")
