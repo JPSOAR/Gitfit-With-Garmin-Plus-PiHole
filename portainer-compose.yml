@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   garmin-pihole:
-    build: .
+    build:
+      context: .
+      Dockerfile: Dockerfile
       tags:
         - myapp:latest
     container_name: git-fit-with-pihole-plus-garmin
