@@ -3,7 +3,8 @@ version: '3.8'
 services:
   garmin-pihole:
     build: .
-    image: gitfit:latest
+      tags:
+        - myapp:latest
     container_name: git-fit-with-pihole-plus-garmin
     env_file:
       - stack.env
