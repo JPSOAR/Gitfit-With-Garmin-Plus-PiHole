@@ -1,3 +1,8 @@
+#garmin specific
+.garminconnect/
+current_stats.json
+piholeapi.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
