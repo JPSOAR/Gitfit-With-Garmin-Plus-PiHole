@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Run the Python script
-CMD ["python", "./getFit.py"]
+CMD ["python","-u", "./gitFit.py"]

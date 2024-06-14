@@ -3,9 +3,8 @@ version: '3.8'
 services:
   garmin-pihole:
     build: .
-    container_name: garmin-pihole-service
+    container_name: garmin-pihole-gitfit
     env_file:
       - .env
     volumes:
       - ./data:/usr/src/app/data
-    command: ["python", "-u", "./getFit.py"]
