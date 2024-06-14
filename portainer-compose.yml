@@ -4,7 +4,6 @@ services:
   garmin-pihole:
     build:
       context: .
-      Dockerfile: Dockerfile
       tags:
         - myapp:latest
     container_name: git-fit-with-pihole-plus-garmin
