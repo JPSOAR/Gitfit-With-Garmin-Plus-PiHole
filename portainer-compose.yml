@@ -5,7 +5,7 @@ services:
     build:
       context: .
       tags:
-        - myapp:latest
+        - gitfit:latest
     container_name: git-fit-with-pihole-plus-garmin
     env_file:
       - stack.env
