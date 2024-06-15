@@ -4,3 +4,4 @@ tv.apple.com exact
 (www\.)?peacocktv\.com regex
 (www\.)?paramountplus\.com regex
 (www\.)?example2\.com regex
+(www\.)?example3\.com regex
