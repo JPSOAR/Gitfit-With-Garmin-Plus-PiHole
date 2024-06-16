@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  garmin-pihole:
+  jpsoar-garmin-pihole:
     build: .
-    container_name: garmin-pihole-gitfit
+    container_name: gitfit-with-garmin-plus-pihole
     env_file:
       - .env

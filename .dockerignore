@@ -2,3 +2,4 @@
 data/current_stats.json
 venv/
 piholeapi.py
+.env

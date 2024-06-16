@@ -1,13 +1,8 @@
 version: '3.8'
 
 services:
-  garmin-pihole:
-    build:
-      context: .
-      tags:
-        - gitfit:latest
-    container_name: git-fit-with-pihole-plus-garmin
+  jpsoar-garmin-pihole:
+    image: ghcr.io/jpsoar/gitfit-with-garmin-plus-pihole:main
+    container_name: gitfit-with-garmin-plus-pihole
     env_file:
       - stack.env
-    #volumes:
-    #  - ./data:/usr/src/app/data
