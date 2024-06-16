@@ -166,7 +166,10 @@ def main():
             curr_active_cals = 0
         if not curr_steps:
             curr_steps = 0
-
+        
+        current_time = datetime.now()
+        formatted_datetime = current_time.strftime("%Y-%m-%dT%H:%M:%S")
+        print(f"Current Timestamp: {formatted_datetime}")
         print(f"Current Active Calories: {curr_active_cals}")
         print(f"Current Steps: {curr_steps}")
 
