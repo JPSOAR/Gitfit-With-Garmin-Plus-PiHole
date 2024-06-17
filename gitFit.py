@@ -17,10 +17,6 @@ import time
 
 def init_api(email, password, tokenstore):
     """Initialize Garmin API with your credentials."""
-
-    #tokenstore_base64 = f"{tokenstore}_base64"
-    #print(tokenstore_base64)
-
     try:
         # Using Oauth1 and OAuth2 token files from directory
         print(
@@ -44,14 +40,6 @@ def init_api(email, password, tokenstore):
             print(
                 f"Oauth tokens stored in '{tokenstore}' directory for future use. (first method)\n"
             )
-            # Encode Oauth1 and Oauth2 tokens to base64 string and safe to file for next login (alternative way)
-            #token_base64 = garmin.garth.dumps()
-            #dir_path = os.path.expanduser(tokenstore_base64)
-            ##with open(dir_path, "w") as token_file:
-            #    token_file.write(token_base64)
-            #print(
-            #    f"Oauth tokens encoded as base64 string and saved to '{dir_path}' file for future use. (second method)\n"
-            #)
         except (FileNotFoundError, GarthHTTPError, GarminConnectAuthenticationError, requests.exceptions.HTTPError) as err:
             return None
 
@@ -70,10 +58,6 @@ def get_garmin_data(client):
         with open("./data/current_stats.json", "w") as json_file:
             json.dump(stats,json_file,indent=4)
         return stats
-        #steps = stats['totalSteps']
-        #activeCalories = stats['activeKilocalories']
-        #return({"steps":steps, "activeCalories":activeCalories})
-        #print("Jim's Steps: {}".format(jim_steps))
         
     except (
         GarminConnectConnectionError,
