@@ -15,23 +15,53 @@ https://www.jpit.io/posts/gitfit-with-garmin-plus-pihole/
 3. activate the venv with `source .\venv\bin\activate`
 4. install required modules with `pip install -r requirements.txt`
 5. Create a file called `.env` in the root of the repository and add the following content to it
+    ```
+    GARMIN_EMAIL="YOURGARMINACCOUNT@EXAMPLE.com"
+    GARMIN_PW="Your Garmin Password"
+    GARMIN_CRED_PATH="./.garminconnect"
+    PIHOLE_HOST="pi.hole"
+    PIHOLE_API_TOKEN="Your Pihole API Token"
+    DAILY_STEP_GOAL="10000"
+    DAILY_CALORIE_GOAL="600"
+    POLLING_FREQ="600"
+    ```
+    | .env Variables | Description |
+    |---|---|
+    | GARMIN_EMAIL | The email/account you use to login to connect.garmin.com |
+    | GARMIN_PW | The password for your connect.garmin.com account | 
+    | GARMIN_CRED_PATH | Relative path of where the script should store your Garmin OAUTH access tokens after logging in for the first time.  I just use `./.garminconnect` |
+    | PIHOLE_HOST | Hostname or IP of the Pi-hole on your network. `pi.hole` is the default |
+    | PIHOLE_API_TOKEN | Your Pi-Hole API Token can be obtained by going to your `Pi-hole's web interface` -> `Settings` -> `API` -> `Show API Token` |
+    | DAILY_STEP_GOAL | Set this to the number of steps you want to get before unblocking your URLs |
+    | DAILY_CALORIE_GOAL | Set this to the number of *active* calories you want to get before unblocking your URLs |
+    | POLLING_FREQ | How frequently to check garmin connect for updates to your daily health metrics | 
+6. Run `gitFit.py`
+
+
+## Example Output
 ```
-GARMIN_EMAIL="YOURGARMINACCOUNT@EXAMPLE.com"
-GARMIN_PW="Your Garmin Password"
-GARMIN_CRED_PATH="./.garminconnect"
-PIHOLE_HOST="pi.hole"
-PIHOLE_API_TOKEN="Your Pihole API Token"
-DAILY_STEP_GOAL="10000"
-DAILY_CALORIE_GOAL="600"
-POLLING_FREQ="600"
+#./gitFit.py
+
+Daily Step Goal Set to: 10000 steps
+Daily Active Calorie Goal Set to: 600 calories
+Domains to Block/Allow:
+['tv.apple.com', 'exact']
+['(www\\.)?netflix\\.com', 'regex']
+['(www\\.)?max\\.com', 'regex']
+['(www\\.)?peacocktv\\.com', 'regex']
+['(www\\.)?paramountplus\\.com', 'regex']
+Trying to login to Garmin Connect using token data from directory './.garminconnect'...
+
+client.get_stats(%s) 2024-06-19
+----------------------------------------------------------------------------------------
+Current Timestamp: 2024-06-19T18:55:34
+Current Active Calories: 662.0
+Current Steps: 10461
+Targeting Pi-Hole API using http://pi.hole/admin/api.php
+Successfully removed tv.apple.com from Pi-Hole blocklist
+Successfully removed (www\.)?netflix\.com from Pi-Hole blocklist
+Successfully removed (www\.)?max\.com from Pi-Hole blocklist
+Successfully removed (www\.)?peacocktv\.com from Pi-Hole blocklist
+Successfully removed (www\.)?paramountplus\.com from Pi-Hole blocklist
+sleeping for 600 seconds...
 ```
-| .env Variables | Description |
-|---|---|
-| GARMIN_EMAIL | The email/account you use to login to connect.garmin.com |
-| GARMIN_PW | The password for your connect.garmin.com account | 
-| GARMIN_CRED_PATH | Relative path of where the script should store your Garmin OAUTH access tokens after logging in for the first time.  I just use `./.garminconnect` |
-| PIHOLE_HOST | Hostname or IP of the Pi-hole on your network. `pi.hole` is the default |
-| PIHOLE_API_TOKEN | Your Pi-Hole API Token can be obtained by going to your `Pi-hole's web interface` -> `Settings` -> `API` -> `Show API Token` |
-| DAILY_STEP_GOAL | Set this to the number of steps you want to get before unblocking your URLs |
-| DAILY_CALORIE_GOAL | Set this to the number of *active* calories you want to get before unblocking your URLs |
-| POLLING_FREQ | How frequently to check garmin connect for updates to your daily health metrics | 
